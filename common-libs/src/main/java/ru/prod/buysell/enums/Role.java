@@ -1,6 +1,5 @@
 package ru.prod.buysell.enums;
 
-import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {
@@ -8,7 +7,7 @@ public enum Role implements GrantedAuthority {
     ROLE_ADMIN;
 
     @Override
-    public @Nullable String getAuthority() {
+    public String getAuthority() {
         return name();
     }
 }

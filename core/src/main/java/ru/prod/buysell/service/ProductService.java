@@ -1,7 +1,6 @@
 package ru.prod.buysell.service;
 
 
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -11,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.prod.buysell.dto.ProductRequest;
 import ru.prod.buysell.dto.ProductResponse;
-import ru.prod.buysell.exception.BusinessException;
-import ru.prod.buysell.mapper.ProductMapper;
 import ru.prod.buysell.entity.Image;
 import ru.prod.buysell.entity.Product;
 import ru.prod.buysell.entity.User;
+import ru.prod.buysell.exception.BusinessException;
+import ru.prod.buysell.mapper.ProductMapper;
 import ru.prod.buysell.repository.ProductRepository;
 import ru.prod.buysell.repository.UserRepository;
 

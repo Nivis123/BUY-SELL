@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BuysellBackendApplication {
+public class AuthentificationServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BuysellBackendApplication.class, args);
+        SpringApplication.run(AuthentificationServiceApplication.class, args);
     }
 
 }

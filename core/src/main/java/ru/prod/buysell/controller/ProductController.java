@@ -1,5 +1,13 @@
 package ru.prod.buysell.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,20 +26,39 @@ import java.util.List;
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Products", description = "Product management endpoints")
 public class ProductController {
 
     private final ProductService productService;
 
+    @Operation(summary = "Get all products or search by title", description = "Public endpoint to list products")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of products",
+                    content = @Content(schema = @Schema(implementation = ProductResponse.class)))
+    })
     @GetMapping
-    public ResponseEntity<List<ProductResponse>> getProducts(@RequestParam(required = false) String title) {
+    public ResponseEntity<List<ProductResponse>> getProducts(
+            @Parameter(description = "Optional title search term") @RequestParam(required = false) String title) {
         return ResponseEntity.ok(productService.getProducts(title));
     }
 
+    @Operation(summary = "Get product by ID", description = "Public endpoint to retrieve single product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product found"),
+            @ApiResponse(responseCode = "404", description = "Product not found")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProduct(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
+    @Operation(summary = "Create new product", description = "Authenticated users can create a product with images",
+            security = @SecurityRequirement(name = "bearerAuth"))
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Product created"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     @PostMapping(consumes = "multipart/form-data")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> createProduct(@Valid @ModelAttribute ProductRequest productRequest) {
@@ -44,6 +71,13 @@ public class ProductController {
         }
     }
 
+    @Operation(summary = "Delete product", description = "Owner can delete their product",
+            security = @SecurityRequirement(name = "bearerAuth"))
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Product deleted"),
+            @ApiResponse(responseCode = "400", description = "Cannot delete product"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     @DeleteMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {

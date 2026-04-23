@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.prod.buysell.dto.UserRegistrationRequest;
+import ru.prod.buysell.entity.User;
+import ru.prod.buysell.exception.BusinessException;
 
 @Service
 @Slf4j
@@ -12,6 +14,7 @@ public class EmailVerificationService {
 
     private final VerificationCodeService verificationCodeService;
     private final EmailService emailService;
+    private final UserService userService;
 
     private static final String ALLOWED_DOMAIN = "@g.nsu.ru";
 
@@ -20,6 +23,17 @@ public class EmailVerificationService {
         if (!isUniversityEmail(email)) {
             log.warn("Попытка регистрации с недопустимым доменом email: {}", email);
             return;
+        }
+
+        User existingUser = userService.getUserByEmail(email);
+        if (existingUser != null) {
+            if (existingUser.isActive()) {
+                log.warn("Попытка повторной регистрации активного пользователя: {}", email);
+                throw new BusinessException("Пользователь с таким email уже зарегистрирован");
+            }
+            log.info("Пользователь {} уже ожидает верификации, отправляем код повторно", email);
+        } else {
+            userService.createPendingUser(request);
         }
 
         String code = verificationCodeService.generateCode();

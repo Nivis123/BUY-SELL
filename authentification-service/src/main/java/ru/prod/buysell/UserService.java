@@ -1,4 +1,4 @@
-package ru.prod.buysell.service;
+package ru.prod.buysell;
 
 
 import lombok.RequiredArgsConstructor;

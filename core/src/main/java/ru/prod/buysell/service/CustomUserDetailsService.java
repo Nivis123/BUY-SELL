@@ -1,15 +1,14 @@
 package ru.prod.buysell.service;
 
 
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.prod.buysell.exception.BusinessException;
 import ru.prod.buysell.entity.User;
+import ru.prod.buysell.exception.BusinessException;
 import ru.prod.buysell.repository.UserRepository;
 
 @Service

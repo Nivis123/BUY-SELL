@@ -2,9 +2,11 @@ package ru.prod.buysell;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-class BuysellBackendApplicationTests {
+@ActiveProfiles("test")
+class CoreApplicationTests {
 
     @Test
     void contextLoads() {

@@ -5,12 +5,35 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="C:\gradle-9.2.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/authentification-service" />
             <option value="$PROJECT_DIR$/common-libs" />
+            <option value="$PROJECT_DIR$/core" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/authentification-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/authentification-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/common-libs" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/common-libs" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
+        <option name="modules">
+          <set>
             <option value="$PROJECT_DIR$/core" />
           </set>
         </option>

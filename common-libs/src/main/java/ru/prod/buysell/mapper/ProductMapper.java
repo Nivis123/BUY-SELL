@@ -1,7 +1,8 @@
 package ru.prod.buysell.mapper;
 
 
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import ru.prod.buysell.dto.ProductRequest;
 import ru.prod.buysell.dto.ProductResponse;
 import ru.prod.buysell.entity.Product;
@@ -13,7 +14,6 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class ProductMapper {
 
-    @Mapping(target = "author", source = "author")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "images", ignore = true)
     @Mapping(target = "previewImageId", ignore = true)

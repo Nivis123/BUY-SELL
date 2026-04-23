@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import ru.prod.buysell.dto.UserRegistrationRequest;
-import ru.prod.buysell.EmailVerificationService;
 
 @Service
 @Slf4j

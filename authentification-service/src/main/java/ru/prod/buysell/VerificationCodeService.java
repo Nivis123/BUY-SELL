@@ -62,4 +62,13 @@ public class VerificationCodeService {
         }
         return valid;
     }
+
+    public boolean isValid(String email, String code) {
+        String storedCode = getCode(email);
+        if (storedCode == null) {
+            log.warn("Код верификации для email {} не найден", email);
+            return false;
+        }
+        return storedCode.equals(code);
+    }
 }
